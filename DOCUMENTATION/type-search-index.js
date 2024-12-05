@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"Randomiser","l":"GenerateReferenceNumber"},{"p":"Randomiser","l":"GenerateUniqueNumber"},{"p":"Main","l":"Main"},{"p":"Randomiser","l":"UniqueNumberBuilder"}];updateSearchResults();
