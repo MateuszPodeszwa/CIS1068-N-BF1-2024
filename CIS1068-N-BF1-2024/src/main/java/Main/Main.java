@@ -9,6 +9,8 @@ package Main;
 import Main.Validator.ValidateNameFormat;
 import Randomiser.GenerateReferenceNumber;
 
+import java.util.Arrays;
+
 import static java.lang.System.out;
 import static java.time.Month.*;
 
@@ -100,10 +102,7 @@ public class Main {
         *      The setLimit only works on the formated name, never on the raw name, for example, it would fork on M Podeszwa instead of passed argument Mateusz Podeszwa.
         * */
 
-
-        out.println(ValidateNameFormat.setLimit(5).setName("Mateusz", "Podeszwa").getName());
-        out.println(ValidateNameFormat.setLimit(5).setName("Mateusz", "Podeszwa").isTheLimitReached);
-        out.println(ValidateNameFormat.withName("sdfs dsffs").getName());
+        out.println(ValidateNameFormat.setLimit(5).setName(fullUserName).getName());
 
     }
 }
