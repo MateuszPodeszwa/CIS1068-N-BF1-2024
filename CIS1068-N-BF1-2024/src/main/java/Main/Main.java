@@ -10,6 +10,7 @@ import Converter.MoneyConverter;
 import Converter.ValidateNameFormat;
 import Randomiser.GenerateReferenceNumber;
 
+import static Converter.MoneyConverter.countryShortNames.*;
 import static java.lang.System.out;
 
 /**
@@ -17,7 +18,7 @@ import static java.lang.System.out;
  * <p>
  * It showcases how to use various classes such as {@link GenerateReferenceNumber},
  * {@link ValidateNameFormat}, and {@link MoneyConverter}. The main method
- * demonstrates generating a random reference number, validating and formatting user names,
+ * demonstrates generating a random reference number, validating and formatting usernames,
  * and converting monetary values into different formats.
  * </p>
  *
@@ -30,7 +31,7 @@ import static java.lang.System.out;
 public class Main {
 
     /**
-     * A static field holding the full user name.
+     * A static field holding the full username.
      * <p>
      * This field is used to demonstrate the {@link ValidateNameFormat} class.
      * </p>
@@ -38,12 +39,12 @@ public class Main {
     private static final String FULL_USER_NAME = "Mateusz Podeszwa";
 
     /**
-     * The main method serves as the entry point for the application.
+     * The main method serves as the entry point for the application.-
      * <p>
      * Steps demonstrated:
      * <ol>
      *   <li>Creating a {@link GenerateReferenceNumber} object and printing out generated reference numbers.</li>
-     *   <li>Using {@link ValidateNameFormat} to apply company formatting rules to a user name,
+     *   <li>Using {@link ValidateNameFormat} to apply company formatting rules to a username,
      *       enforcing a maximum character limit.</li>
      *   <li>Demonstrating usage of {@link MoneyConverter} to convert a numeric value into a
      *       formatted currency string.</li>
@@ -69,7 +70,7 @@ public class Main {
          * The getName() method retrieves the formatted name.
          * This shows how the name is adjusted based on company-defined rules and length limits.
          */
-        out.println(ValidateNameFormat.setLimit(5).setName(fullUserName).getName());
+        out.println(ValidateNameFormat.setLimit(5).setName(FULL_USER_NAME).getName());
 
         /*
          * Demonstrating MoneyConverter usage with various chained methods.
@@ -81,5 +82,6 @@ public class Main {
          */
         MoneyConverter converterLong = new MoneyConverter();
         // Print the formatted pound value (e.g. £25.65) for the provided raw balance (2565 pence).
+        out.println(converterLong.setBalance(2565).get(UK).toPound());
     }
 }
