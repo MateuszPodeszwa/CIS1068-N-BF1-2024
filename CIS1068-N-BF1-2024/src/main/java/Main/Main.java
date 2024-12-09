@@ -50,7 +50,6 @@ public class Main {
      *   <li>Demonstrating usage of {@link MoneyConverter} to convert a numeric value into a
      *       formatted currency string.</li>
      * </ol>
-     * </p>
      *
      * @param arg command-line arguments (not used)
      */

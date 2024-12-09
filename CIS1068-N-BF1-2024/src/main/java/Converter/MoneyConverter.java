@@ -17,7 +17,6 @@ import java.util.function.Supplier;
  *     MoneyConverter converter = new MoneyConverter();
  *     String pounds = converter.setBalance(250).get("UK").toPound(); // "£2.50"
  * }</pre>
- * </p>
  *
  * <p>
  * Author: Mateusz Podeszwa<br>
