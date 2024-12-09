@@ -21,10 +21,45 @@ import java.util.function.Supplier;
  * <p>
  * Author: Mateusz Podeszwa<br>
  * Year: 2024<br>
- * Version: 2.0
+ * Version: 2.3
  * </p>
  */
 public class MoneyConverter {
+
+    /**
+     * Enumerates the short names of countries supported by the {@code MoneyConverter}.
+     * <p>
+     * This enum defines the countries for which specific currency symbols and formatting
+     * are available in the {@link MoneyConverter} and its associated classes.
+     * </p>
+     *
+     * <p>
+     * The current country codes are:
+     * <ul>
+     *   <li>{@code UK} - United Kingdom, using Pound Sterling (£)</li>
+     *   <li>{@code PL} - Poland, using Polish zloty (PLN)</li>
+     *   <li>{@code US} - United States, using US Dollar ($)</li>
+     * </ul>
+     * </p>
+     *
+     * <p>
+     * Additional countries may be added to this enum as needed to support further currencies.
+     * </p>
+     *
+     * <p>
+     * Example usage:
+     * <pre>{@code
+     *     MoneyConverter converter = new MoneyConverter();
+     *     DisplayedMoney displayed = converter.get(countryShortNames.UK);
+     *     String result = displayed.toPound();
+     * }</pre>
+     * </p>
+     */
+    public enum countryShortNames {
+        UK,
+        PL,
+        US
+    };
 
     // The raw money value in the lowest denomination (e.g., pence or cents).
     private int rawMoney;
@@ -87,7 +122,7 @@ public class MoneyConverter {
      * @param country a string indicating the country format (e.g. "UK", "US", "PL")
      * @return a new {@code DisplayedMoney} object representing the formatted string form
      */
-    public DisplayedMoney get(String country) {
+    public DisplayedMoney get(countryShortNames country) {
         // If rawMoney is not set, use the defaultSupplier value.
         return new DisplayedMoney(nullCheck().orElseGet(this.defaultSupplier), country);
     }
@@ -128,14 +163,14 @@ public class MoneyConverter {
          * @param money the raw money amount in the smallest unit
          * @param country the country code determining which currency symbols to use
          */
-        private DisplayedMoney(int money, String country) {
+        private DisplayedMoney(int money, countryShortNames country) {
             this.money = money;
             // Maintenance note:
             // Add more countries as needed.
             this.CURRENCY = switch (country) {
-                case "UK" -> new String[] {"£", "p"};
-                case "US" -> new String[] {"$", "c"};
-                case "PL" -> new String[] {"PLN", "gr."};
+                case UK -> new String[] {"£", "p"};
+                case US -> new String[] {"$", "c"};
+                case PL -> new String[] {"PLN", "gr."};
                 default -> new String[] {"", ""};
             };
         }
@@ -229,10 +264,8 @@ public class MoneyConverter {
         public int toPound(boolean state) {
             // Maintenance note:
             // We utilise Math.round() when state is true.
-            if (state) {
-                return (int) Math.round(toPound());
-            }
-            return (int) toPound();
+            if (state) return (int) Math.round(toPound());
+            else       return (int) toPound();
         }
     }
 }
