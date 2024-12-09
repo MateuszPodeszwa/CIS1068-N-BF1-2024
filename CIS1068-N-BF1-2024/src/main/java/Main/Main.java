@@ -37,7 +37,7 @@ public class Main {
      * This field is used to demonstrate the {@link ValidateNameFormat} class.
      * </p>
      */
-    private static final String fullUserName = "Mateusz Podeszwa";
+    private static final String FULL_USER_NAME = "Mateusz Podeszwa";
 
     /**
      * The main method serves as the entry point for the application.
@@ -76,13 +76,12 @@ public class Main {
         /*
          * Demonstrating MoneyConverter usage with various chained methods.
          * For example:
-         *  converterLong.setBalance(2565).get("UK").toPound(); returns "£25.65" as a string.
-         *  converterLong.setBalance(2565).get("UK").toPence(); returns "2565p"
+         *  converterLong.setBalance(2565).get(UK).toPound(); returns "£25.65" as a string.
+         *  converterLong.setBalance(2565).get(UK).toPence(); returns "2565p"
          *  converterLong.setBalance(2565).get().toPound(); returns a double value (25.65)
          * If setBalance is not called, the converter uses a default value (0).
          */
         MoneyConverter converterLong = new MoneyConverter();
         // Print the formatted pound value (e.g. £25.65) for the provided raw balance (2565 pence).
-        out.println(converterLong.setBalance(2565).get("UK").toPound());
     }
 }
