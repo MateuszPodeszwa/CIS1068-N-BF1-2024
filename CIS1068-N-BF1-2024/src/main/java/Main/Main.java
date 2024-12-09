@@ -11,8 +11,6 @@ import Converter.ValidateNameFormat;
 import Randomiser.GenerateReferenceNumber;
 
 import static java.lang.System.out;
-import java.math.BigDecimal;
-import java.math.MathContext;
 
 /**
  * The {@code Main} class is the entry point of the application.
