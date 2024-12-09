@@ -6,13 +6,13 @@
 
 package Main;
 
-import Main.Validator.ValidateNameFormat;
+import Converter.MoneyConverter;
+import Converter.ValidateNameFormat;
 import Randomiser.GenerateReferenceNumber;
 
-import java.util.Arrays;
-
 import static java.lang.System.out;
-import static java.time.Month.*;
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * The {@code Main} class serves as the entry point of the application. It demonstrates
@@ -76,7 +76,7 @@ public class Main {
         /*
         * POSSIBLE IMPLEMENTATION OF ValidateNameFormat.
         * ValidateNameFormat is a static clas meaning it can be referenced and used without declaring an object.
-        *   import Main.Validator.ValidateNameFormat;
+        *   import Converter.ValidateNameFormat;
         * The class uses method chaining providing a flexible and adaptable API for future use.
         * To validate if the name follows the company rule-set these are possible calls that are valid:
         *   1. The most simple implementation, to pass the name and format it to follow the company policy
@@ -104,5 +104,7 @@ public class Main {
 
         out.println(ValidateNameFormat.setLimit(5).setName(fullUserName).getName());
 
+        MoneyConverter converterLong = new MoneyConverter(() -> 0);
+        out.println( converterLong.setBalance(2000).get("US").toPound() );
     }
 }
