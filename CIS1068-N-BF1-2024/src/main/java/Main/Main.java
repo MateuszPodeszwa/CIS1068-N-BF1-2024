@@ -15,96 +15,75 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 
 /**
- * The {@code Main} class serves as the entry point of the application. It demonstrates
- * the usage of the {@link GenerateReferenceNumber} class by generating and printing
- * reference numbers.
+ * The {@code Main} class is the entry point of the application.
  * <p>
- * This class imports the {@code GenerateReferenceNumber} from the {@code Randomiser} package
- * and utilises it within the {@code main} method.
- * </p>
- * <p>
- * Example usage:
- * <pre>{@code
- * GenerateReferenceNumber m = new GenerateReferenceNumber();
- * System.out.println(m.generateReferenceNumber());
- * }</pre>
- * <p>
- * Note: Ensure that the {@code Randomiser} package is correctly referenced in your project.
+ * It showcases how to use various classes such as {@link GenerateReferenceNumber},
+ * {@link ValidateNameFormat}, and {@link MoneyConverter}. The main method
+ * demonstrates generating a random reference number, validating and formatting user names,
+ * and converting monetary values into different formats.
  * </p>
  *
- * @author
- *     Mateusz Podeszwa
- * @version 1.0
- * @since 2024
+ * <p>
+ * Author: Mateusz Podeszwa<br>
+ * Year: 2024<br>
+ * Version: 1.0
+ * </p>
  */
 public class Main {
 
-    private static final String fullUserName = "Mateusz Podeszwa";
     /**
-     * The main method serves as the entry point of the application. It creates an instance
-     * of {@code GenerateReferenceNumber} and prints out two generated reference numbers.
+     * A static field holding the full user name.
+     * <p>
+     * This field is used to demonstrate the {@link ValidateNameFormat} class.
+     * </p>
+     */
+    private static final String fullUserName = "Mateusz Podeszwa";
+
+    /**
+     * The main method serves as the entry point for the application.
+     * <p>
+     * Steps demonstrated:
+     * <ol>
+     *   <li>Creating a {@link GenerateReferenceNumber} object and printing out generated reference numbers.</li>
+     *   <li>Using {@link ValidateNameFormat} to apply company formatting rules to a user name,
+     *       enforcing a maximum character limit.</li>
+     *   <li>Demonstrating usage of {@link MoneyConverter} to convert a numeric value into a
+     *       formatted currency string.</li>
+     * </ol>
+     * </p>
      *
-     * @param arg command-line arguments (not used).
+     * @param arg command-line arguments (not used)
      */
     public static void main(String[] arg) {
 
         /*
-        * POSSIBLE IMPLEMENTATIONS OF GenerateReferenceNumber
-        * Unless specified, the GenerateReferenceNumber will take the current month.
-        * To select the month of liking, specify it in the Object Initialisation.
-        *   GenerateReferenceNumber CurrentReferenceNumber = new GenerateReferenceNumber(Month.JULY);
-        *   GenerateReferenceNumber CurrentReferenceNumber = new GenerateReferenceNumber(Month.DECEMBER);
-        * The Class is using Java's Month API therefore it is possible to pass the argument without the Enumeration Month specifier.
-        * To do so `import static java.time.Month.*;`
-        *   GenerateReferenceNumber CurrentReferenceNumber = new GenerateReferenceNumber(DECEMBER);
-        *   GenerateReferenceNumber CurrentReferenceNumber = new GenerateReferenceNumber(APRIL);
-        *
-        * To specify the length of the reference number use setter:
-        *   CurrentReferenceNumber.setReferenceLength(20);
-        * The .setReferenceNumber takes integer as an argument.
-        * It is also possible to receive currently selected month, an actual current month, get the information about current reference length.
-        *
-        * To edit the reference number prefix character, please pass it as a char argument while calling .generateReferenceNumber method which is overloaded.
-        *   CurrentReferenceNumber.generateReferenceNumber('T')
-        * If not specified the .generateReferenceNumber will automatically and randomly generate a char alphabetic symbol.
-        * For more information please visit the documentation.
-        * */
-
+         * Generating a reference number using GenerateReferenceNumber.
+         * This demonstrates how to create a default reference number with no month specified.
+         * For customisation, pass a specified month during object creation or use setters to configure.
+         */
         GenerateReferenceNumber CurrentReferenceNumber = new GenerateReferenceNumber();
+        // Print the generated reference number to the console
         out.println(CurrentReferenceNumber.generateReferenceNumber());
 
         /*
-        * POSSIBLE IMPLEMENTATION OF ValidateNameFormat.
-        * ValidateNameFormat is a static clas meaning it can be referenced and used without declaring an object.
-        *   import Converter.ValidateNameFormat;
-        * The class uses method chaining providing a flexible and adaptable API for future use.
-        * To validate if the name follows the company rule-set these are possible calls that are valid:
-        *   1. The most simple implementation, to pass the name and format it to follow the company policy
-        *      if passed: Mateusz Podeszwa, the method returns the object .getClass()
-        *       ValidateNameFormat.withName("Adam", "PPAPAP")
-        *      To receive the formated name, we can call .getName()
-        *       ValidateNameFormat.withName("Adam", "PPAPAP").getName();
-        *      The function will return A Ppapap
-        *      Additionally the function withName is overloaded and accepts both firstName, secondName and fullName such as "Adam Ppapap".
-        *      The function then splits the name where the space is.
-        *      Additionally, it is possible to receive boolean value .isTheLimitReached which checks if the provided length limit is reached.
-        *      Works only with .setLimit()
-        *       ValidateNameFormat.withName("Adam", "PPAPAP").isTheLimitReached // Always return false
-        *   2. To set a max length limit on a name to comply with the company policy. Call .setLimit method with takes int as an argument.
-        *       ValidateNameFormat.setLimit(5).setName("Mateusz", "Podeszwa")
-        *      As previously, the method returns an object. You could notice that we replaced .withName with the .setName it is because .withName is static.
-        *      To receive the formated name use .getName method.
-        *       ValidateNameFormat.setLimit(5).setName("Mateusz", "Podeszwa").getName();
-        *      To check if the limit has been reached use .isLimitReached
-        *       ValidateNameFormat.setLimit(5).setName("Mateusz", "Podeszwa").isLimitReached // Returns True as limit of 5 char has been reached
-        *      If the limit has been reached and implemented the .getName() method, the name will be returned as a substring, with the maximum characters
-        *      that was provided in the .setLimit. For example, if the limit is 5 and the initial name had 20 char, the returned name will be a substring of .substring(0, 5).
-        *      The setLimit only works on the formated name, never on the raw name, for example, it would fork on M Podeszwa instead of passed argument Mateusz Podeszwa.
-        * */
-
+         * Demonstrating ValidateNameFormat usage.
+         * The class is static, so no object instantiation is required.
+         * By calling setLimit(5), any name provided will be truncated to 5 characters after formatting.
+         * The getName() method retrieves the formatted name.
+         * This shows how the name is adjusted based on company-defined rules and length limits.
+         */
         out.println(ValidateNameFormat.setLimit(5).setName(fullUserName).getName());
 
-        MoneyConverter converterLong = new MoneyConverter(() -> 0);
-        out.println( converterLong.setBalance(2000).get("US").toPound() );
+        /*
+         * Demonstrating MoneyConverter usage with various chained methods.
+         * For example:
+         *  converterLong.setBalance(2565).get("UK").toPound(); returns "£25.65" as a string.
+         *  converterLong.setBalance(2565).get("UK").toPence(); returns "2565p"
+         *  converterLong.setBalance(2565).get().toPound(); returns a double value (25.65)
+         * If setBalance is not called, the converter uses a default value (0).
+         */
+        MoneyConverter converterLong = new MoneyConverter();
+        // Print the formatted pound value (e.g. £25.65) for the provided raw balance (2565 pence).
+        out.println(converterLong.setBalance(2565).get("UK").toPound());
     }
 }
