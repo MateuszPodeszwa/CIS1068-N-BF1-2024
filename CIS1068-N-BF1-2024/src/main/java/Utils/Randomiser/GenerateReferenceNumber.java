@@ -44,6 +44,12 @@ public class GenerateReferenceNumber {
         this.referenceLength = 4;
     }
 
+    public GenerateReferenceNumber(Month month, int referenceLength) {
+        this.month = month;
+        if (referenceLength > 1)
+            this.referenceLength = referenceLength;
+    }
+
     /**
      * Constructs a {@code GenerateReferenceNumber} object using the current month.
      */
