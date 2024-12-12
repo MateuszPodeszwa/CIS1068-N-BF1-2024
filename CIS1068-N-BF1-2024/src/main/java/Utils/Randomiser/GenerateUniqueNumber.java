@@ -1,4 +1,4 @@
-package Randomiser;
+package Utils.Randomiser;
 
 import java.util.Arrays;
 import java.util.Random;

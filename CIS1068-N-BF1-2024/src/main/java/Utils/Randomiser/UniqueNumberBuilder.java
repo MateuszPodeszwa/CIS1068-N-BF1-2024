@@ -1,4 +1,4 @@
-package Randomiser;
+package Utils.Randomiser;
 
 /**
  * The {@code UniqueNumberBuilder} class assists in constructing a unique number sequence.
