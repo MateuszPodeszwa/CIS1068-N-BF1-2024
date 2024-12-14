@@ -1,4 +1,4 @@
-package Utils.Bank;
+package Application.Bank;
 
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.atomic.AtomicInteger;

@@ -1,8 +1,8 @@
-package Utils.Bank;
+package Application.Bank;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import Utils.Bank.BankAccount;
+
 import Utils.Randomiser.GenerateReferenceNumber;
 
 import java.util.Map;

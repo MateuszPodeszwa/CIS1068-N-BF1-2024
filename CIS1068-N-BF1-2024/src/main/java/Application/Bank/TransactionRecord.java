@@ -1,4 +1,4 @@
-package Utils.Bank;
+package Application.Bank;
 
 import Utils.Converter.MoneyConverter;
 
