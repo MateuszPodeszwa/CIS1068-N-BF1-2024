@@ -1,7 +1,5 @@
 package Application.DataPlanner.Activity;
 
-import Utils.Randomiser.GenerateReferenceNumber;
-
 import java.time.LocalDateTime;
 
 // Defines the contract for each activity
@@ -32,8 +30,8 @@ public abstract class Activity {
     * This ensures that Activity objects are easy to handle by the rest of the system (like itineraries and pricing).
     * */
 
-    protected Activity(ActivityMetadata metadata) {
-        this.code = metadata.referenceNumber().generateReferenceNumber('G'); // if referenceNumber generates a code
+    public Activity(ActivityMetadata metadata) {
+        this.code = metadata.referenceNumber();
         this.readableName = metadata.readableName();
         this.description = metadata.description();
         this.location = metadata.location();
@@ -47,10 +45,40 @@ public abstract class Activity {
     public enum Location {
         HOME,
         OFFICE,
-        OTHER;
-    }
+        ONLINE,
+        OUTDOORS
+    };
 
-    private String code;
+    // Getters
+    public int getDurationInMinutes() {
+        return durationInMinutes;
+    }
+    public String getCode() {
+        return this.code;
+    }
+    public String getReadableName() {
+        return readableName;
+    }
+    public String getDescription() { return description;}
+    public Location getLocation() { return location; }
+    public LocalDateTime getDateAndTime() { return dateAndTime; }
+    public int getBaseCostInPence() { return baseCostInPence; }
+    public boolean isInsuranceMandatory() { return isInsuranceMandatory; }
+
+    // Setters
+    public void setReadableName(String readableName) { this.readableName = readableName; }
+    public void setDescription(String description) { this.description = description; }
+    public void setLocation(Location location) { this.location = location; }
+    public void setDateAndTime(LocalDateTime dateAndTime) { this.dateAndTime = dateAndTime; }
+    public void setBaseCostInPence(int baseCostInPence) { this.baseCostInPence = baseCostInPence; }
+    public void setDurationInMinutes(int durationInMinutes) { this.durationInMinutes = durationInMinutes; }
+    public void setInsuranceMandatory(boolean insuranceMandatory) { isInsuranceMandatory = insuranceMandatory; }
+
+    // Abstract methods
+    public abstract int calculateBaseCostInPence();
+
+    // Fields
+    private final String code;
     private String readableName;
     private String description;
     private Location location;
