@@ -2,16 +2,16 @@
 
 ## Supported Versions
 
-Our project is compatible with all JDK versions from 11 through 23.
+Our project is compatible with all JDK versions from 17 through 23.
 
 | JDK Version | Supported          |
 |-------------|--------------------|
+| > 23        | ❔                |
 | 23          | :white_check_mark: |
-| 22          | :white_check_mark: |
 | 21          | :white_check_mark: |
-| 20          | :white_check_mark: |
-| > 11        | :white_check_mark: |
-| < 11        | :x:                |
+| 17          | :white_check_mark: |
+| > 17        | :white_check_mark: |
+| < 17        | :x:                |
 
 ## Reporting a Vulnerability
 
