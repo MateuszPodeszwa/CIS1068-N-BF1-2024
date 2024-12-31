@@ -41,7 +41,6 @@ public abstract class Activity {
         this.isInsuranceMandatory = metadata.isInsuranceMandatory();
     }
 
-
     public enum Location {
         HOME,
         OFFICE,
@@ -66,19 +65,29 @@ public abstract class Activity {
     public boolean isInsuranceMandatory() { return isInsuranceMandatory; }
 
     // Setters
-    public void setReadableName(String readableName) { this.readableName = readableName; }
-    public void setDescription(String description) { this.description = description; }
-    public void setLocation(Location location) { this.location = location; }
-    public void setDateAndTime(LocalDateTime dateAndTime) { this.dateAndTime = dateAndTime; }
-    public void setBaseCostInPence(int baseCostInPence) { this.baseCostInPence = baseCostInPence; }
-    public void setDurationInMinutes(int durationInMinutes) { this.durationInMinutes = durationInMinutes; }
-    public void setInsuranceMandatory(boolean insuranceMandatory) { isInsuranceMandatory = insuranceMandatory; }
+    public Activity setReadableName(String readableName) { this.readableName = readableName; return this; }
+    public Activity setDescription(String description) { this.description = description; return this; }
+    public Activity setLocation(Location location) { this.location = location; return this; }
+    public Activity setDateAndTime(LocalDateTime dateAndTime) { this.dateAndTime = dateAndTime; return this; }
+    public Activity setBaseCostInPence(int baseCostInPence) { this.baseCostInPence = baseCostInPence; return this; }
+    public Activity setDurationInMinutes(int durationInMinutes) { this.durationInMinutes = durationInMinutes; return this; }
+    public Activity setInsuranceMandatory(boolean insuranceMandatory) { isInsuranceMandatory = insuranceMandatory; return this; }
 
     // Abstract methods
-    public abstract int calculateBaseCostInPence();
+    public abstract int calculateFinalCostInPence();
+    public abstract int baseCostInPence();
+
+    protected int getFeeInPence() {
+        return FEE_PENCE;
+    }
+
+    protected double getFeeInPercentage() {
+        return FEE_PENCE / 100.0;
+    }
 
     // Fields
     private final String code;
+    private final int FEE_PENCE = 10_000;
     private String readableName;
     private String description;
     private Location location;

@@ -12,6 +12,7 @@ import java.util.HashMap;
 /*
 * This class creates a register of all activities to easily access them, it bounds unique ID with each activity.*/
 public class ActivityRegistry {
+
     private final Map<String, ActivityMetadata> metadataMap;
     private static ArrayList<String> individualReferenceList;
 
@@ -19,7 +20,7 @@ public class ActivityRegistry {
         metadataMap = new HashMap<>();
         individualReferenceList = new ArrayList<>();
         /*
-        * There is a space if you want to read activities froma file or database, you can add them here
+        * There is a space if you want to read activities from file or database, you can add them here
         * */
     }
 

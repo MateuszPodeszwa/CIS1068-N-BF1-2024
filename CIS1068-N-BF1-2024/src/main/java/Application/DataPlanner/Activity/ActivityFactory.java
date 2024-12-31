@@ -36,7 +36,7 @@ public class ActivityFactory {
         };
     }
 
-    public Activity initialiseActivity(Class<? extends Activity> theClass,String individualReferenceCode) {
+    public Activity initialiseActivity(Class<? extends Activity> theClass, String individualReferenceCode) {
         try
         {
             String activityReferenceCode = theClass.getDeclaredField("classReference").get(null).toString(); // Samples the general ID

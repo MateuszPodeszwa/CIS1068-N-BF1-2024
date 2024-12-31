@@ -65,11 +65,12 @@ public class Main {
 
         System.out.println("DEBUG: " + registry.listAllActivitiesOfAKind("SAS"));
 
-        // Step 2: Create the factory, passing the registr
+        // Step 2: Create the factory, passing the register
         ActivityFactory factory = new ActivityFactory(registry);
 
         // Step 3: Create activities using the factory
         Activity origamiAct = factory.initialiseActivity(OrigamiActivity.class, "CAB32");
+        Activity origamiAc2t = factory.initialiseActivity(OrigamiActivity.class, "CAB32");
 
         System.out.println("DEBUG: " + origamiAct.getReadableName());
         System.out.println("DEBUG: " + origamiAct.getCode());
@@ -78,6 +79,8 @@ public class Main {
         System.out.println("DEBUG: " + origamiAct.getLocation());
         System.out.println("DEBUG: " + origamiAct.getDateAndTime());
         System.out.println("DEBUG: " + origamiAct.isInsuranceMandatory());
+
+        // To add addons, now when you have done building each activity, you can call add addon method for each, and then update dinal cost
 
         // (Optional) Step 4: Possibly pass these activities into an itinerary or further processing
     }
