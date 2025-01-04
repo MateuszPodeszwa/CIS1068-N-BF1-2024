@@ -14,8 +14,8 @@ public class BaseActivity extends Activity {
     }
 
     @Override
-    public int calculateBaseCostInPence() {
-        return 0;
+    public int calculateFinalCostInPence() {
+        return super.getBaseCostInPence() + getFee().get().toPence() + addonsCost();
     }
 
     public static final String classReference = "BAC-00";

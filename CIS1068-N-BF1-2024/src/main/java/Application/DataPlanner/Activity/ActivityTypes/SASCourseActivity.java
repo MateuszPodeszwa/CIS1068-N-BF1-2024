@@ -17,11 +17,7 @@ public class SASCourseActivity extends Activity {
 
     @Override
     public int calculateFinalCostInPence() {
-        return baseCostInPence() + getFeeInPence();
+        return super.getBaseCostInPence() + getFee().get().toPence() + addonsCost();
     }
 
-    @Override
-    public int baseCostInPence() {
-        return BASE_COST_IN_PENCE;
-    }
 }

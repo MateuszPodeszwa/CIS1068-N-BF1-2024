@@ -12,7 +12,7 @@ public class OrigamiActivity extends Activity {
     }
 
     @Override
-    public int calculateBaseCostInPence() {
-        return 0;
+    public int calculateFinalCostInPence() {
+        return super.getBaseCostInPence() + getFee().get().toPence() + addonsCost();
     }
 }
