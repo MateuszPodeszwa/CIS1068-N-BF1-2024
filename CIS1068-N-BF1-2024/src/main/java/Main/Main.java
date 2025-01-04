@@ -8,80 +8,171 @@ package Main;
 
 import Application.DataPlanner.Activity.Activity;
 import static Application.DataPlanner.Activity.Activity.Location;
+
+import Application.DataPlanner.Activity.ActivityAddons.AddOn;
+import Application.DataPlanner.Activity.ActivityAddons.InsuranceAddon;
+import Application.DataPlanner.Activity.ActivityAddons.PhotographyAddon;
+import Application.DataPlanner.Activity.ActivityAddons.TravelAddon;
 import Application.DataPlanner.Activity.ActivityFactory;
 import Application.DataPlanner.Activity.ActivityMetadata;
 import Application.DataPlanner.Activity.ActivityRegistry;
+import Application.DataPlanner.Activity.ActivityTypes.BaseActivity;
+import Application.DataPlanner.Activity.ActivityTypes.CookeryClassActivity;
 import Application.DataPlanner.Activity.ActivityTypes.OrigamiActivity;
 import Application.DataPlanner.Activity.ActivityTypes.SASCourseActivity;
+import Application.DataPlanner.itinerary.Itinerary;
+import Application.DataPlanner.itinerary.ItineraryAddon;
 import Utils.Converter.MoneyConverter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         // Step 1: Create (or load) the registry.
-        ActivityRegistry registry = new ActivityRegistry();
+        ActivityRegistry week34_2025Register = new ActivityRegistry();
+        ActivityRegistry week35_2025Register = new ActivityRegistry();
 
         /*
          * By default, your ActivityRegistry might already contain
          * some entries in its constructor.
          * Optionally, you can manually add more:
          */
-        registry.addActivity(
+        week34_2025Register.addActivity(
                 new ActivityMetadata(
-                        registry.generateIndividualReference("CAB32", OrigamiActivity.classReference),
+                        week34_2025Register.generateIndividualReference("ORG01", OrigamiActivity.classReference),
                         "Origami Workshop",
                         "Learn paper folding techniques",
                         Location.OUTDOORS,
-                        LocalDateTime.of(2025, 2, 20, 14, 50),
-                        25_00,
-                        60,
-                        true)
+                        LocalDateTime.of(2025, 4, 20, 8, 45),
+                        61_58,
+                        30,
+                        true,
+                        new ArrayList<>(List.of(
+                                new InsuranceAddon(),
+                                new PhotographyAddon(),
+                                new TravelAddon()
+                        )))
         );
-
-        registry.addActivity(
+        week34_2025Register.addActivity(
                 new ActivityMetadata(
-                        registry.generateIndividualReference("AAS2", OrigamiActivity.classReference),
-                        "Origami Workshop 2",
-                        "Learn paper folding techniques 2",
-                        Activity.Location.HOME,
-                        LocalDateTime.now().plusDays(22),
-                        10200,        // £10.00
-                        160,          // 60 minutes
-                        false)
+                        week34_2025Register.generateIndividualReference("ORG02", OrigamiActivity.classReference),
+                        "Origami Workshop",
+                        "Learn paper folding techniques",
+                        Location.OUTDOORS,
+                        LocalDateTime.of(2025, 4, 27, 8, 45),
+                        61_58,
+                        30,
+                        true,
+                        new ArrayList<>(List.of(
+                                new PhotographyAddon(),
+                                new TravelAddon()
+                        )))
         );
-
-        registry.addActivity(
+        week34_2025Register.addActivity(
                 new ActivityMetadata(
-                        registry.generateIndividualReference("C3B32", SASCourseActivity.classReference),
-                        "SAS Workshop",
-                        "Learn SAS techniques",
-                        Activity.Location.OFFICE,
-                        LocalDateTime.now().plusDays(12),
-                        200,        // £10.00
-                        10,          // 60 minutes
-                        true)
+                        week34_2025Register.generateIndividualReference("SAS01", SASCourseActivity.classReference),
+                        "SAS Programming Course",
+                        "Learn how to use SAS for data analysis",
+                        Location.ONLINE,
+                        LocalDateTime.of(2024, 4, 22, 12, 0),
+                        123_26,
+                        70,
+                        false,
+                        new ArrayList<>(List.of(
+                                new TravelAddon()
+                        )))
         );
 
-        System.out.println("DEBUG: " + registry.listAllActivitiesOfAKind("SAS"));
+        week34_2025Register.addActivity(
+                new ActivityMetadata(
+                        week34_2025Register.generateIndividualReference("COK01", CookeryClassActivity.classReference),
+                        "Cooking Class",
+                        "Learn how to use plates for food analysis",
+                        Location.HOME,
+                        LocalDateTime.of(2025, 4, 29, 12, 30),
+                        822_32,
+                        120,
+                        true,
+                        new ArrayList<>(List.of(
+                                new InsuranceAddon()
+                        )))
+        );
+
+        week35_2025Register.addActivity(
+                new ActivityMetadata(
+                        week35_2025Register.generateIndividualReference("ORG03", OrigamiActivity.classReference),
+                        "Origami Workshop",
+                        "Learn paper folding techniques",
+                        Location.OUTDOORS,
+                        LocalDateTime.of(2025, 4, 28, 8, 45),
+                        61_58,
+                        30,
+                        true,
+                        new ArrayList<>(List.of(
+                                new InsuranceAddon()
+                        )))
+        );
+
+        System.out.println("DEBUG: " + week34_2025Register.listAllActivitiesOfAKind("SAS"));
+        System.out.println(ActivityRegistry.getIndividualReferenceList());
 
         // Step 2: Create the factory, passing the register
-        ActivityFactory factory = new ActivityFactory(registry);
+        ActivityFactory week34Activities = new ActivityFactory(week34_2025Register);
+        ActivityFactory week35Activities = new ActivityFactory(week35_2025Register);
 
         // Step 3: Create activities using the factory
-        Activity origamiAct = factory.initialiseActivity(OrigamiActivity.class, "CAB32");
-        Activity origamiAc2t = factory.initialiseActivity(OrigamiActivity.class, "CAB32");
+        // Activity Monday34Activity = week34Activities.initialiseActivity(OrigamiActivity.class, "ORG01");
 
-        System.out.println("DEBUG: " + origamiAct.getReadableName());
-        System.out.println("DEBUG: " + origamiAct.getCode());
-        System.out.println("DEBUG: " + origamiAct.getDurationInMinutes());
-        System.out.println("DEBUG: " + origamiAct.getBaseCostInPence());
-        System.out.println("DEBUG: " + origamiAct.getLocation());
-        System.out.println("DEBUG: " + origamiAct.getDateAndTime());
-        System.out.println("DEBUG: " + origamiAct.isInsuranceMandatory());
+        Itinerary week34to35_2025Package = new Itinerary(List.of(
+                week34Activities.initialiseActivity(OrigamiActivity.class, "ORG01"),
+                week34Activities.initialiseActivity(OrigamiActivity.class, "ORG02"),
+                week34Activities.initialiseActivity(SASCourseActivity.class, "SAS01"),
+                week34Activities.initialiseActivity(CookeryClassActivity.class, "COK01"),
+                week35Activities.initialiseActivity(OrigamiActivity.class, "ORG03")
+        ));
 
-        // To add addons, now when you have done building each activity, you can call add addon method for each, and then update dinal cost
+        week34to35_2025Package.addItineraryAddon(ItineraryAddon.ACCOMMODATION);
+        week34to35_2025Package.addItineraryAddon(ItineraryAddon.LUNCH);
+        week34to35_2025Package.addItineraryAddon(ItineraryAddon.COFFEE);
+
+        System.out.println(week34to35_2025Package.getItineraryAddons().stream().mapToInt(ItineraryAddon::getPrice).sum());
+
+
+
+        // To add addons, now when you have done building each activity, you can call add addon method for each, and then update final cost
 
         // (Optional) Step 4: Possibly pass these activities into an itinerary or further processing
+
+    }
+
+
+
+
+
+
+
+
+
+    public void ifYouHaveEverEncounteredThatOneBizarreNullPointerExceptionInsideAnOverengineeredSpringApplicationThatUsesReflectionToDynamicallyGenerateProxiesForYourProxiesWhileSimultaneouslyThrowingClassNotFoundErrorsBecauseOfAMisconfiguredClassLoaderThenYouMightFindThisExceptionallyLongMethodNameMildlyEntertainingEvenThoughItSeverelyViolatesEVERY_NAMING_CONVENTIONEverConceivedButHeySometimesWeAllNeedToIndulgeInALittleRidiculousnessToRemindOurselvesThatJavaIsNOTJustACorporateWorkhorseButAlsoACanvasForOurMostUnhingedNamingAspirationsAndInsomniaDrivenCodingExperiments() {
+        System.out.println(" It's an Easter egg! EVEN PROGRAMMERS HAVE SENSE OF HUMOUR! At least I really hope so...? :) ");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
