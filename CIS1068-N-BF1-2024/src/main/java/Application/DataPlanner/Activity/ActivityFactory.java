@@ -21,10 +21,10 @@ public class ActivityFactory {
         this.registry = registry;
     }
 
-    private Activity createActivity(String code) {
+    private Activity createActivity(String code) throws NoSuchFieldException {
         ActivityMetadata metadata = registry.getMetadataMap().get(code);
         if (metadata == null) {
-            throw new IllegalArgumentException("No such activity: " + code);
+            throw new IllegalArgumentException("No such activity: " + code + " in the registry " + System.identityHashCode(registry));
         }
 
         return switch (metadata.referenceNumber().split("_")[0]) {

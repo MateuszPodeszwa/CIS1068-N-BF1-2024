@@ -9,12 +9,15 @@ import Utils.Randomiser.GenerateReferenceNumber;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /*
 * This class creates a register of all activities to easily access them, it bounds unique ID with each activity.*/
 public class ActivityRegistry {
 
     private final Map<String, ActivityMetadata> metadataMap;
     private static ArrayList<String> individualReferenceList;
+    static AtomicInteger activityCounter = new AtomicInteger(0);
 
     public ActivityRegistry() {
         metadataMap = new HashMap<>();
@@ -30,18 +33,26 @@ public class ActivityRegistry {
 
     public void addActivity(ActivityMetadata activityMetadata) {
         metadataMap.put(activityMetadata.referenceNumber(), activityMetadata);
-        System.out.println("DEBUG Activity: " + activityMetadata.referenceNumber() + " " + metadataMap.get(activityMetadata.referenceNumber()).readableName());
+        System.out.println("DEBUG Activity [" + activityCounter.incrementAndGet() + "]: " + activityMetadata.referenceNumber() + " " + metadataMap.get(activityMetadata.referenceNumber()).readableName());
     }
 
     public String generateIndividualReference(String individualReference, String ActivityReferenceCode) {
         // Adds each individual reference to the list, so it can keep track of all individual references and make sure these stay unique
         if (individualReferenceList.contains(individualReference)) {
-            throw new IllegalArgumentException("Individual reference already exists");
+            throw new IllegalArgumentException("Individual reference already exists " + individualReference + " please provide a unique reference for " + ActivityReferenceCode + " activity");
         } else {
             individualReferenceList.add(individualReference);
             return uniqueReferenceGeneratorAndIdentifier(individualReference, ActivityReferenceCode);
         }
     }
+
+    public static void flushIndividualReferenceList() {
+        individualReferenceList.clear();
+    }
+    public static ArrayList<String> getIndividualReferenceList() {return individualReferenceList;}
+    public static AtomicInteger getActivityCounter() {return activityCounter;}
+    public static int getTotalActivities() {return activityCounter.get();}
+    public static void flushAtomicInteger() {activityCounter.set(0);}
 
     /* This function takes an argument of activity type such as SASCourse etc. and then lists all available activities of this kind in the map.*/
     public Map<String, ActivityMetadata> listAllActivitiesOfAKind(String ActivityReferenceCode) {
