@@ -1,4 +1,10 @@
 package Application.DataPlanner.Activity.ActivityAddons;
 
-public class TravelAddon {
+public final class TravelAddon implements AddOn {
+
+    public final int ADDON_COST;
+
+    public TravelAddon() {
+        ADDON_COST = 10;
+    }
 }

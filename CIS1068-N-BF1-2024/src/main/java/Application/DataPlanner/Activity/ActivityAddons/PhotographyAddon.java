@@ -1,4 +1,10 @@
 package Application.DataPlanner.Activity.ActivityAddons;
 
-public class PhotographyAddon {
+public final class PhotographyAddon implements AddOn {
+
+    public final int ADDON_COST;
+
+    public PhotographyAddon() {
+        ADDON_COST = 30;
+    }
 }
